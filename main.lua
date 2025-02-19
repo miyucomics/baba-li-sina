@@ -1,26 +1,22 @@
-local Entity = require("objects.entity")
+love.graphics.setLineStyle("rough")
+love.graphics.setDefaultFilter("nearest", "nearest")
+
+local World = require("libraries.world")
 local Vector = require("libraries.vector")
 
-local player = Entity(0, 0)
+function love.load()
+    require("libraries.post")
+    require("libraries.input"):load()
+    World:addEntity(require("entities.entity")(Vector(0, 0)))
+    World:addSystem(require("systems.inputManager"))
+    World:addSystem(require("systems.entityRenderer"))
+    World:emit("load")
+end
 
 function love.update(dt)
-    player:update(dt)
+    World:emit("update", dt)
 end
 
 function love.draw()
-    player:draw()
-end
-
-function love.keypressed(key)
-    if key == "left" then
-        player:move(Vector(-1, 0))
-    elseif key == "right" then
-        player:move(Vector(1, 0))
-    end
-
-    if key == "up" then
-        player:move(Vector(0, -1))
-    elseif key == "down" then
-        player:move(Vector(0, 1))
-    end
+    World:emit("draw")
 end
