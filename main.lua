@@ -7,9 +7,11 @@ local Vector = require("libraries.vector")
 function love.load()
     require("libraries.post")
     require("libraries.input"):load()
-    World:addEntity(require("entities.entity")(Vector(0, 0)))
+    World:addEntity(require("entities.ruleManager")())
+    World:addEntity(require("entities.ijo")(Vector(0, 0), "baba"))
     World:addSystem(require("systems.inputManager"))
-    World:addSystem(require("systems.entityRenderer"))
+    World:addSystem(require("systems.movementManager"))
+    World:addSystem(require("systems.levelRenderer"))
     World:emit("load")
 end
 
