@@ -1,4 +1,4 @@
-local pixelSize = 4
+local pixelSize = 2
 local screenWidth = love.graphics.getWidth() / pixelSize
 local screenHeight = love.graphics.getHeight() / pixelSize
 local screenCanvas = love.graphics.newCanvas(screenWidth, screenHeight)
